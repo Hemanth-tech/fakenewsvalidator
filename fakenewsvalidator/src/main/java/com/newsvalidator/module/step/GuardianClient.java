@@ -21,6 +21,14 @@ public class GuardianClient extends BaseClient {
 		logger.info("first news headline from Guardian "+newsHeadline);
 		return newsHeadline;
 	}
+	
+	public String getFirstNewsArticle() {
+		acceptCookies();
+		guardianPage.navigateToNews();
+		String newsHeadline = guardianPage.getfirstArticleAtGaurdian();
+		logger.info("first news headline from Guardian "+newsHeadline);
+		return newsHeadline;
+	}
 
 	public void uploadFirstNewsToJson(String news) throws IOException {
 		JsonUtilities.getTestFlowData().setNews(news);

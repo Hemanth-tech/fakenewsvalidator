@@ -18,7 +18,9 @@ public class GoogleSearchResultsClient extends BaseClient {
 	String guardianDomain = JsonUtilities.getTestFlowData().getDomain();
 	String newsString = JsonUtilities.getTestFlowData().getNews();
 
-	public void searchResultsEvaluator(Integer count) throws IOException {
+	public Integer searchResultsEvaluator(String searchType, Integer count) throws IOException {
+		JsonUtilities.clearExistingData(searchType);
+
 		List<WebElement> searchResults = googleSearchResultsPage.getSearchResults();
 		Set<String> domains = new HashSet<String>();
 		int checker = 0;
@@ -39,7 +41,7 @@ public class GoogleSearchResultsClient extends BaseClient {
 					checker++;
 				}
 
-				JsonUtilities.setValues(currentIdex, domain, newsHeadline, similarity);
+				JsonUtilities.setValues(currentIdex, domain, newsHeadline, similarity,searchType);
 				logger.info("Headline " + searchResults.indexOf(searchResult) + ": " + newsHeadline);
 				logger.info("domain " + domain);
 				logger.info("Semantic Similarity: " + similarity);
@@ -52,6 +54,7 @@ public class GoogleSearchResultsClient extends BaseClient {
 			}
 		}
 
+		return checker;
 	}
 
 }

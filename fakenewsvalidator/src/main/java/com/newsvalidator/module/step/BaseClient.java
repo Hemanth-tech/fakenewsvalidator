@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.newsvalidator.driver.TestDriver;
+import com.newsvalidator.utilities.FrameworkUtilities;
+import com.newsvalidator.utilities.JsonUtilities;
 
 public class BaseClient {
 	
@@ -12,15 +14,18 @@ public class BaseClient {
 	protected static final Logger logger = LogManager.getLogger(BaseClient.class);
 
 	
-	public void navigateTo(String Url) {
-		logger.info("navigating to url "+Url);
-		driver.get(Url);
+	public void navigateTo(String UrlKey) {
+		String url = FrameworkUtilities.environmnetProperties().getProperty(UrlKey);
+		logger.info("navigating to url "+url);
+		driver.get(url);
 	}
 
 	public String getClientTitle() {
 		String title = driver.getTitle();
 		logger.info("Title of current page "+title);
-		return driver.getTitle();
+		return title;
 	}
+	
+
 
 }

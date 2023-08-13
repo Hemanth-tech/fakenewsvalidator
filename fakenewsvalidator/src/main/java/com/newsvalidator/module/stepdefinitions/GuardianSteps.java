@@ -16,19 +16,19 @@ public class GuardianSteps {
 	private static final Logger logger = LogManager.getLogger(GuardianSteps.class);
 
 	GuardianClient guardianClient = new GuardianClient();
-	String url = FrameworkUtilities.environmnetProperties().getProperty("guardianUrl");
 	String expectedPageTitle = "News | The Guardian";
 
 	@Given("I am on The Guardian news article page")
-	public void navigateToGuardianArticlePage() {
-		guardianClient.navigateTo(url);
+	public void navigateToGuardianArticlePage() {		
+		guardianClient.navigateTo("guardianUrl");
 		String actualPageTitle = guardianClient.getClientTitle();
 		Assert.assertEquals(ErrorCodes.GUARDIAN_TITLE_MISMATCH.getMessage(), actualPageTitle, expectedPageTitle);
 	}
 
-	@Given("I get the first news article")
+	@Given("I get the first news article from Guardain")
 	public void getFirstNewsArticle() throws IOException {
-		String news = guardianClient.getHeadingOfFirstNewsArticle();
+//		String news = guardianClient.getHeadingOfFirstNewsArticle();
+		String news = guardianClient.getFirstNewsArticle();
 		guardianClient.uploadFirstNewsToJson(news);
 
 	}

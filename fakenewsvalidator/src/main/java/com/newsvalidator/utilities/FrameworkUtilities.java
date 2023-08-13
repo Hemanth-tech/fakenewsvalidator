@@ -33,6 +33,8 @@ public class FrameworkUtilities {
 			try {
 				envProperties.load(reader);
 				reader.close();
+				logger.info("loaded env properties");
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -52,6 +54,8 @@ public class FrameworkUtilities {
 			try {
 				properties.load(reader);
 				reader.close();
+				logger.info("loaded config properties");
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
